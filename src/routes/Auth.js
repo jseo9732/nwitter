@@ -2,6 +2,8 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import React, { useState } from "react";
 
@@ -22,6 +24,7 @@ const Auth = () => {
   };
 
   const auth = getAuth();
+
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -36,6 +39,20 @@ const Auth = () => {
   };
 
   const toggleAccount = () => setNewAccount((prev) => !prev);
+
+  const onSocialClick = async (event) => {
+    const {
+      target: { name },
+    } = event;
+    let provider;
+    if (name === "google") {
+      provider = new GoogleAuthProvider();
+    } else if (name === "github") {
+      // 깃허브 같은 다른 소셜 로그인 이용하려면 이런 식으로 추가한다.
+    }
+    const data = await signInWithPopup(auth, provider);
+    console.log(data);
+  };
 
   return (
     <div>
@@ -66,7 +83,9 @@ const Auth = () => {
         {newAccount ? "Sign in" : "Create Account"}
       </span>
       <div>
-        <button>Continue with Google</button>
+        <button onClick={onSocialClick} name="google">
+          Continue with Google
+        </button>
       </div>
     </div>
   );
