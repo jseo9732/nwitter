@@ -50,8 +50,7 @@ const Auth = () => {
     } else if (name === "github") {
       // 깃허브 같은 다른 소셜 로그인 이용하려면 이런 식으로 추가한다.
     }
-    const data = await signInWithPopup(auth, provider);
-    console.log(data);
+    await signInWithPopup(auth, provider);
   };
 
   return (
