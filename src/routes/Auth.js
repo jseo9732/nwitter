@@ -1,10 +1,10 @@
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+import { authService } from "fBase";
 import React, { useState } from "react";
 
 const Auth = () => {
@@ -23,7 +23,7 @@ const Auth = () => {
     }
   };
 
-  const auth = getAuth();
+  const auth = authService;
 
   const onSubmit = async (event) => {
     event.preventDefault();
