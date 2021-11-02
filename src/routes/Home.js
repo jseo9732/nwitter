@@ -6,13 +6,14 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { dbService } from "fBase";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Nweet from "components/Nweet";
 
 const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
   const [nweets, setNweets] = useState([]);
-  const [attachment, setattachment] = useState();
+  const [attachment, setAttachment] = useState();
+  const fileInput = useRef();
   // 실시간 반영되지 않는 방식
   //   const getNweets = async () => {
   //     const dbNweets = await getDocs(collection(dbService, "nweets"));
@@ -62,11 +63,15 @@ const Home = ({ userObj }) => {
       const {
         currentTarget: { result },
       } = finishedEvent;
-      setattachment(result);
+      setAttachment(result);
     };
     reader.readAsDataURL(theFile);
   };
-  const onClearPhotoClick = () => setattachment();
+  const onClearPhotoClick = () => {
+    setAttachment();
+    fileInput.current.value = "";
+  };
+
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -77,11 +82,16 @@ const Home = ({ userObj }) => {
           placeholder="What's on your mind?"
           maxLength={120}
         />
-        <input type="file" accept="image/*" onChange={onFileChange} />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={onFileChange}
+          ref={fileInput}
+        />
         <input type="submit" value="Nweet" />
         {attachment && (
           <div>
-            <img src={attachment} width="50x" height="50px" />
+            <img src={attachment} alt="미리보기" width="50x" height="50px" />
             <button onClick={onClearPhotoClick}>Clear</button>
           </div>
         )}
