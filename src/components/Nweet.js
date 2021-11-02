@@ -1,14 +1,18 @@
-import { dbService } from "fBase";
+import { deleteObject, ref } from "@firebase/storage";
+import { dbService, storageService } from "fBase";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import React from "react";
 import { useState } from "react/cjs/react.development";
 
 const Nweet = ({ nweetObj, isOwner }) => {
   // 삭제 기능
-  const onDeleteClick = () => {
+  const onDeleteClick = async () => {
     const ok = window.confirm("정말 이 nweet을 삭제하시겠습니까?");
     if (ok) {
-      deleteDoc(doc(dbService, `nweets/${nweetObj.id}`));
+      await deleteDoc(doc(dbService, `nweets/${nweetObj.id}`));
+      if (nweetObj.attachmentUrl !== "") {
+        await deleteObject(ref(storageService, nweetObj.attachmentUrl));
+      }
     }
   };
 
