@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { authService, dbService } from "fBase";
+import React from "react";
+import { authService } from "fBase";
 import { signOut, updateProfile } from "firebase/auth";
 import { useHistory } from "react-router";
-import { collection, getDocs, query, where } from "@firebase/firestore";
+// import { collection, getDocs, query, where } from "@firebase/firestore";
 import { useState } from "react";
 
 const Profile = ({ refreshUser, userObj }) => {
