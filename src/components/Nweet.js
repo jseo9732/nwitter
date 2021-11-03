@@ -1,8 +1,7 @@
 import { deleteObject, ref } from "@firebase/storage";
 import { dbService, storageService } from "fBase";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
-import React from "react";
-import { useState } from "react/cjs/react.development";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
