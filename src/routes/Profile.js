@@ -29,20 +29,20 @@ const Profile = ({ refreshUser, userObj }) => {
       refreshUser();
     }
   };
-  const getMyNweets = async () => {
-    const nweets = query(
-      collection(dbService, "nweets"),
-      where("creatorId", "==", userObj.uid)
-    );
-    const querySnapshot = await getDocs(nweets);
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, "=>", doc.data());
-    });
-  };
+  // const getMyNweets = async () => {
+  //   const nweets = query(
+  //     collection(dbService, "nweets"),
+  //     where("creatorId", "==", userObj.uid)
+  //   );
+  //   const querySnapshot = await getDocs(nweets);
+  //   querySnapshot.forEach((doc) => {
+  //     console.log(doc.id, "=>", doc.data());
+  //   });
+  // };
 
-  useEffect(() => {
-    getMyNweets();
-  });
+  // useEffect(() => {
+  //   getMyNweets();
+  // });
 
   return (
     <div className="container">
